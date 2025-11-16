@@ -85,7 +85,7 @@ def display_dashboard(df, monthly_df, expense_df, avg_category_spending, avg_mon
 
     with col4:
         st.subheader("Monthly Spending Trend")
-        fig, ax = plt.subplots(figsize=(6, 3.5))
+        fig, ax = plt.subplots(figsize=(4, 1.5))
         monthly_series.plot(ax=ax, color='darkgreen', label='Historical Expense')
     
     forecast_date = monthly_series.index[-1] + pd.DateOffset(months=1)
@@ -113,7 +113,7 @@ def display_dashboard(df, monthly_df, expense_df, avg_category_spending, avg_mon
 
     with col5:
         st.subheader("Average Expense by Day of Week")
-        fig, ax = plt.subplots(figsize=(5, 3.5))
+        fig, ax = plt.subplots(figsize=(4, 2.5))
         sns.barplot(x=daily_spending.index, y=daily_spending.values, palette='viridis', ax=ax)
     
     ax.set_title('Average Daily Spending Habits')
@@ -129,7 +129,7 @@ def display_dashboard(df, monthly_df, expense_df, avg_category_spending, avg_mon
         # Resetting index to plot Date against Running_Balance
         balance_df = df.set_index('Date')['Running_Balance']
     
-        fig, ax = plt.subplots(figsize=(7, 3.5))
+        fig, ax = plt.subplots(figsize=(6, 2.5))
         balance_df.plot(kind='line', ax=ax, color='steelblue')
     
     # Add a zero line for reference
