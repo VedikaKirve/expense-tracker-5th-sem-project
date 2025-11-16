@@ -99,6 +99,47 @@ def display_dashboard(df, monthly_df, expense_df, avg_category_spending, avg_mon
     ax.grid(True, linestyle='--', alpha=0.6)
     st.pyplot(fig)
 
+    # New Section: Add this code after the col3, col4 section ends
+
+    st.markdown("---")
+    st.header("🚶 Behavioral Insights")
+
+    # Prepare data for Day of Week analysis
+    day_of_week_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    daily_spending = expense_df.groupby('DayName')['Amount'].mean().reindex(day_of_week_order)
+
+    # Create a new column pair for the plot
+    col5, col6 = st.columns(2)
+
+    with col5:
+        st.subheader("Average Expense by Day of Week")
+        fig, ax = plt.subplots(figsize=(6, 4))
+        sns.barplot(x=daily_spending.index, y=daily_spending.values, palette='viridis', ax=ax)
+    
+    ax.set_title('Average Daily Spending Habits')
+    ax.set_xlabel('Day of Week')
+    ax.set_ylabel('Average Amount Spent ($)')
+    ax.tick_params(axis='x', rotation=45)
+    st.pyplot(fig)
+
+    # Continue in the 'display_dashboard' function, inside 'with col6:'
+
+    with col6:
+        st.subheader("Cumulative Net Financial Position")
+        # Resetting index to plot Date against Running_Balance
+        balance_df = df.set_index('Date')['Running_Balance']
+    
+        fig, ax = plt.subplots(figsize=(8, 4))
+        balance_df.plot(kind='line', ax=ax, color='steelblue')
+    
+    # Add a zero line for reference
+    ax.axhline(0, color='red', linestyle='--', linewidth=1)
+    
+    ax.set_title('Running Balance Over Time')
+    ax.set_xlabel('Date')
+    ax.set_ylabel('Net Balance ($)')
+    ax.grid(True, linestyle='--', alpha=0.6)
+    st.pyplot(fig)
 
     # --- Execute App (The Correct Runner) ---
 if __name__ == "__main__":
