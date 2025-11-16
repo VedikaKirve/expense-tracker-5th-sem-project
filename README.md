@@ -20,6 +20,17 @@ The application is built with Python, showcasing a modular design (using the `sr
 
 ---
 
+### Project Goal (The Why)
+The singular goal of this project is to create a robust and demonstrable data science portfolio piece that provides quantifiable value to the user:
+
+Goal: To convert passive financial data into active financial guidance, enabling the user to gain complete foresight and control over their budget. The system must deliver accurate predictions (e.g., next month's expense) and actionable, personalized advice (e.g., saving tips and overspending alerts) based on observed behavior.
+
+### 💡 Key Financial Insights
+-Budget Focus: Spending is heavily concentrated in a few categories (e.g., Rent, Travel). Budgeting efforts should target these high-impact areas first.
+-Volatile Behavior: Spending shows high volatility and seasonality (spikes around holidays), justifying the use of the SARIMA model for reliable forecasting.
+-Actionable Value: The system generates proactive alerts for anomalies (e.g., Rent Warning) and provides concrete saving tips (e.g., reducing Travel by 15% saves $\$X$), translating analysis into direct user action.
+-Health Warning: High net expense indicates the system is vital for establishing financial discipline and stabilizing overall financial health.
+
 ### 🚀 How to Run Locally
 
 1.  **Environment Setup:** Navigate to the project root and create and activate the virtual environment:
@@ -35,3 +46,14 @@ The application is built with Python, showcasing a modular design (using the `sr
     ```
 
 ---
+
+### Author 
+Vedika Kirve
+
+Email: vedikakirve6@gmail.com 
+
+LinkedIn: http://www.linkedin.com/in/vedikakirve06 
+
+GitHub: https://github.com/VedikaKirve
+
+Project Status: Complete and Deployed.
