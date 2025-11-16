@@ -84,20 +84,37 @@ def display_dashboard(df, monthly_df, expense_df, avg_category_spending, avg_mon
         st.pyplot(fig)
 
     with col4:
-        st.subheader("Monthly Spending Trend")
-        fig, ax = plt.subplots(figsize=(4, 1.5))
-        monthly_series.plot(ax=ax, color='darkgreen', label='Historical Expense')
-    
-    forecast_date = monthly_series.index[-1] + pd.DateOffset(months=1)
-    ax.scatter(forecast_date, pred_mean, color='red', marker='X', s=200, label='Predicted Expense')
-    ax.plot(pd.to_datetime([monthly_series.index[-1], forecast_date]), [monthly_series.iloc[-1], pred_mean], 'r--')
-    
-    ax.set_title('Total Monthly Expenses & Forecast')
-    ax.set_xlabel('Date')
-    ax.set_ylabel('Amount ($)')
-    ax.legend()
-    ax.grid(True, linestyle='--', alpha=0.6)
-    st.pyplot(fig)
+            st.subheader("Monthly Spending Trend")
+
+            # 1. Reduced Figure Size
+            fig, ax = plt.subplots(figsize=(6, 3.5)) # Use your desired reduced size
+
+            # Data Preparation (No change needed here)
+            monthly_series = monthly_df.set_index('Date')['Monthly_Expense']
+
+            # Historical Data
+            monthly_series.plot(ax=ax, color='darkgreen', label='Historical Expense')
+
+            # Add the forecasted point
+            forecast_date = monthly_series.index[-1] + pd.DateOffset(months=1)
+            ax.scatter(forecast_date, pred_mean, color='red', marker='X', s=200, label='Predicted Expense')
+            ax.plot(pd.to_datetime([monthly_series.index[-1], forecast_date]), [monthly_series.iloc[-1], pred_mean], 'r--')
+
+            # 2. Corrected Legend Placement (Fixes Overlap)
+            ax.legend(
+                loc='upper left',          # Anchor the legend to the upper left
+                bbox_to_anchor=(1.05, 1.0), # Shift the legend outside the plot area (to the right)
+                fontsize=9                  # Optionally reduce font size for better fit
+)
+
+            # 3. Ensures Everything Fits
+            plt.tight_layout() 
+
+            ax.set_title('Total Monthly Expenses & Forecast')
+            ax.set_xlabel('Date')
+            ax.set_ylabel('Amount ($)')
+            ax.grid(True, linestyle='--', alpha=0.6)
+            st.pyplot(fig)
 
     # New Section: Add this code after the col3, col4 section ends
 
@@ -113,33 +130,35 @@ def display_dashboard(df, monthly_df, expense_df, avg_category_spending, avg_mon
 
     with col5:
         st.subheader("Average Expense by Day of Week")
-        fig, ax = plt.subplots(figsize=(4, 2.5))
+            # Reduced height to (6, 3) for a cleaner fit
+        fig, ax = plt.subplots(figsize=(6, 3)) 
         sns.barplot(x=daily_spending.index, y=daily_spending.values, palette='viridis', ax=ax)
-    
-    ax.set_title('Average Daily Spending Habits')
-    ax.set_xlabel('Day of Week')
-    ax.set_ylabel('Average Amount Spent ($)')
-    ax.tick_params(axis='x', rotation=45)
-    st.pyplot(fig)
+
+        ax.set_title('Average Daily Spending Habits')
+        ax.set_xlabel('Day of Week')
+        ax.set_ylabel('Average Amount Spent ($)')
+        ax.tick_params(axis='x', rotation=45)
+        plt.tight_layout() # Ensures labels don't overlap
+        st.pyplot(fig)
 
     # Continue in the 'display_dashboard' function, inside 'with col6:'
 
     with col6:
         st.subheader("Cumulative Net Financial Position")
-        # Resetting index to plot Date against Running_Balance
         balance_df = df.set_index('Date')['Running_Balance']
-    
-        fig, ax = plt.subplots(figsize=(6, 2.5))
+
+        # Reduced size to (6, 3) for better fit
+        fig, ax = plt.subplots(figsize=(6, 3)) 
         balance_df.plot(kind='line', ax=ax, color='steelblue')
-    
-    # Add a zero line for reference
-    ax.axhline(0, color='red', linestyle='--', linewidth=1)
-    
-    ax.set_title('Running Balance Over Time')
-    ax.set_xlabel('Date')
-    ax.set_ylabel('Net Balance ($)')
-    ax.grid(True, linestyle='--', alpha=0.6)
-    st.pyplot(fig)
+
+        ax.axhline(0, color='red', linestyle='--', linewidth=1)
+
+        ax.set_title('Running Balance Over Time')
+        ax.set_xlabel('Date')
+        ax.set_ylabel('Net Balance ($)')
+        ax.grid(True, linestyle='--', alpha=0.6)
+        plt.tight_layout() # Ensures labels don't overlap
+        st.pyplot(fig)
 
     # --- Execute App (The Correct Runner) ---
 if __name__ == "__main__":
