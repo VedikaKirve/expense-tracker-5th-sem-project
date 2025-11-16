@@ -50,8 +50,10 @@ Goal: To convert passive financial data into active financial guidance, enabling
 ### Author 
 Vedika Kirve
 
-Email: vedikakirve6@gmail.com
-LinkedIn: http://www.linkedin.com/in/vedikakirve06
+Email: vedikakirve6@gmail.com 
+
+LinkedIn: http://www.linkedin.com/in/vedikakirve06 
+
 GitHub: https://github.com/VedikaKirve
 
 Project Status: Complete and Deployed.
