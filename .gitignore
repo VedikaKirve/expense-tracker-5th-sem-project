@@ -1,0 +1,13 @@
+# Virtual Environments
+venv/
+
+# Python Files
+__pycache__/
+*.pyc
+
+# Operating System Files
+.DS_Store
+
+# Data and Models (Keep local environment clean)
+# We will exclude the actual data file here for safety, assuming it's too large/private.
+data/*.csv
